@@ -8,6 +8,12 @@ const initialValue: Descendant[] = [
 ];
 
 import { Leaf, MarkButton, Provider } from '@components';
+import {
+  AiOutlineBold,
+  AiOutlineItalic,
+  AiOutlineStrikethrough,
+  AiOutlineUnderline,
+} from 'react-icons/ai';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 
 export default () => {
@@ -20,8 +26,10 @@ export default () => {
   return (
     <Provider>
       <Slate editor={editor} initialValue={initialValue}>
-        <MarkButton label="B" format="bold" />
-        <MarkButton label="I" format="italic" />
+        <MarkButton format="bold" icon={<AiOutlineBold />} />
+        <MarkButton format="italic" icon={<AiOutlineItalic />} />
+        <MarkButton format="underline" icon={<AiOutlineUnderline />} />
+        <MarkButton format="strikeThrough" icon={<AiOutlineStrikethrough />} />
         <Editable renderLeaf={renderLeaf} />
       </Slate>
     </Provider>

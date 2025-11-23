@@ -3,7 +3,13 @@ import { BaseEditor } from 'slate';
 import { ReactEditor } from 'slate-react';
 
 export type CustomElement = { type: 'paragraph'; children: CustomText[] };
-export type CustomText = { text: string; bold?: boolean; italic?: boolean };
+export type CustomText = {
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikeThrough?: boolean;
+};
 export type CustomEditor = BaseEditor & ReactEditor;
 export type CustomTextKey = keyof Omit<CustomText, 'text'>;
 

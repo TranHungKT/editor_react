@@ -1,19 +1,21 @@
 import { Button } from '@chakra-ui/react';
 import { CustomTextKey } from '@model/types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useSlate } from 'slate-react';
 import { isMarkActive } from 'utils/editor';
 
 interface MarkButtonProps {
-  label: string;
   format: CustomTextKey;
+  label?: string;
+  icon?: ReactNode;
 }
 
-export function MarkButton({ label, format }: MarkButtonProps) {
+export function MarkButton({ label, format, icon }: MarkButtonProps) {
   const editor = useSlate();
 
+  const isActive = isMarkActive(editor, format);
+
   const toggleMark = () => {
-    const isActive = isMarkActive(editor, format);
     if (isActive) {
       editor.removeMark(format);
     } else {
@@ -22,8 +24,8 @@ export function MarkButton({ label, format }: MarkButtonProps) {
   };
 
   return (
-    <Button variant="outline" onClick={toggleMark}>
-      {label}
+    <Button variant={isActive ? 'solid' : 'outline'} onClick={toggleMark}>
+      {icon} {label}
     </Button>
   );
 }
