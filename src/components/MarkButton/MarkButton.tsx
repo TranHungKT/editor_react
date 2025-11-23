@@ -9,7 +9,7 @@ interface MarkButtonProps {
   format: CustomTextKey;
 }
 
-export default function MarkButton({ label, format }: MarkButtonProps) {
+export function MarkButton({ label, format }: MarkButtonProps) {
   const editor = useSlate();
 
   const toggleMark = () => {
