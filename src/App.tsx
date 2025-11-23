@@ -9,16 +9,29 @@ const initialValue: Descendant[] = [
   },
 ];
 
-import { Button } from '@chakra-ui/react';
-import { Editable, Slate, withReact } from 'slate-react';
+import MarkButton from '@components/MarkButton/MarkButton';
+import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
+
+const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
+  if (leaf.bold) {
+    children = <strong>{children}</strong>;
+  }
+
+  return <span {...attributes}>{children}</span>;
+};
 
 export default () => {
   const [editor] = useState(() => withReact(createEditor()));
+
+  const renderLeaf = React.useCallback(
+    (props: RenderLeafProps) => <Leaf {...props} />,
+    [],
+  );
   return (
     <Provider>
-      <Button>Click me</Button>
       <Slate editor={editor} initialValue={initialValue}>
-        <Editable />
+        <MarkButton label="B" format="bold" />
+        <Editable renderLeaf={renderLeaf} />
       </Slate>
     </Provider>
   );

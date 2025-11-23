@@ -7,7 +7,8 @@
     "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "paths": {
-      "@components/*": ["./components/*"]
+      "@components/*": ["./components/*"],
+      "@model/*": ["./model/*"]
     },
     "strict": true,
     "typeRoots": ["./node_modules/@types", "./src/types.ts"]
