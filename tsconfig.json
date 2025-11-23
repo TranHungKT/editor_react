@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "jsx": "react",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "paths": {
+      "@components/*": ["./components/*"]
+    },
+    "strict": true,
+    "typeRoots": ["./node_modules/@types", "./src/types.ts"]
+  },
+  "include": ["src/**/*"]
+}
