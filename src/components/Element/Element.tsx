@@ -22,5 +22,5 @@ export function Element({ attributes, children, element }: RenderElementProps) {
     return <Heading size="lg">{children}</Heading>;
   }
 
-  return <span {...attributes}>{children}</span>;
+  return <p {...attributes}>{children}</p>;
 }

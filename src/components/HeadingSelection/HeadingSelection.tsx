@@ -30,7 +30,11 @@ const BlockHeadingCollection = createListCollection({
 export function HeadingSelection() {
   const editor = useSlate();
   return (
-    <Select.Root collection={BlockHeadingCollection}>
+    <Select.Root
+      collection={BlockHeadingCollection}
+      key={Math.random() * 1000}
+      style={{ width: '320px' }}
+    >
       <Select.HiddenSelect />
       <Select.Control>
         <Select.Trigger>

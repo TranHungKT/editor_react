@@ -3,11 +3,36 @@ import { createEditor, Descendant } from 'slate';
 const initialValue: Descendant[] = [
   {
     type: 'paragraph',
-    children: [{ text: 'A line of text in a paragraph.' }],
+    children: [
+      { text: 'This is editable ' },
+      { text: 'rich', bold: true },
+      { text: ' text, ' },
+      { text: 'much', italic: true },
+      { text: ' better than a ' },
+      { text: '<textarea>' },
+      { text: '!' },
+    ],
+  },
+  {
+    type: 'paragraph',
+    children: [
+      {
+        text: "Since it's rich text, you can do things like turn a selection of text ",
+      },
+      { text: 'bold', bold: true },
+      {
+        text: ', or add a semantically rendered block quote in the middle of the page, like this:',
+      },
+    ],
+  },
+
+  {
+    type: 'paragraph',
+    children: [{ text: 'Try it out for yourself!' }],
   },
 ];
 
-import { createListCollection, HeadingProps } from '@chakra-ui/react';
+import { HStack, StackSeparator } from '@chakra-ui/react';
 import {
   Element,
   HeadingSelection,
@@ -15,8 +40,6 @@ import {
   MarkButton,
   Provider,
 } from '@components';
-import { BlockButton } from '@components/BlockButton/BlockButton';
-import { CustomElementType } from '@model/types';
 import {
   AiOutlineBold,
   AiOutlineItalic,
@@ -24,29 +47,12 @@ import {
   AiOutlineUnderline,
 } from 'react-icons/ai';
 import {
-  Editable,
   RenderElementProps,
   RenderLeafProps,
   Slate,
   withReact,
 } from 'slate-react';
-
-const BlockHeadingCollection = createListCollection({
-  items: [
-    { label: 'Paragraph', value: 'paragraph', type: 'paragraph', size: 'lg' },
-    { label: 'Heading 1', value: 'H1', type: 'H1', size: '6xl' },
-    { label: 'Heading 2', value: 'H2', type: 'H2', size: '5xl' },
-    { label: 'Heading 3', value: 'H3', type: 'H3', size: '4xl' },
-    { label: 'Heading 4', value: 'H4', type: 'H4', size: '3xl' },
-    { label: 'Heading 5', value: 'H5', type: 'H5', size: '2xl' },
-    { label: 'Heading 6', value: 'H6', type: 'H6', size: 'xl' },
-  ] as {
-    label: string;
-    value: string;
-    type: CustomElementType;
-    size: HeadingProps['size'];
-  }[],
-});
+import { StyledEditable } from 'styles';
 
 export default () => {
   const [editor] = useState(() => withReact(createEditor()));
@@ -64,15 +70,31 @@ export default () => {
   return (
     <Provider>
       <Slate editor={editor} initialValue={initialValue}>
-        <MarkButton format="bold" icon={<AiOutlineBold />} />
-        <MarkButton format="italic" icon={<AiOutlineItalic />} />
-        <MarkButton format="underline" icon={<AiOutlineUnderline />} />
-        <MarkButton format="strikeThrough" icon={<AiOutlineStrikethrough />} />
-        <BlockButton type="H1" icon={<AiOutlineStrikethrough />} />
-        <Editable renderLeaf={renderLeaf} renderElement={renderElement} />
-        <div />
-        <div /> <div /> <div /> <div /> <div /> <div /> <div />{' '}
-        <HeadingSelection />
+        <HStack
+          direction={'row'}
+          separator={<StackSeparator />}
+          style={{ marginBottom: '20px' }}
+        >
+          <HeadingSelection />
+
+          <HStack gap={0}>
+            <MarkButton format="bold" icon={<AiOutlineBold />} />
+            <MarkButton format="italic" icon={<AiOutlineItalic />} />
+            <MarkButton format="underline" icon={<AiOutlineUnderline />} />
+            <MarkButton
+              format="strikeThrough"
+              icon={<AiOutlineStrikethrough />}
+            />
+          </HStack>
+        </HStack>
+
+        <StyledEditable
+          renderLeaf={renderLeaf}
+          renderElement={renderElement}
+          placeholder="Enter some rich text…"
+          spellCheck
+          autoFocus
+        />
       </Slate>
     </Provider>
   );

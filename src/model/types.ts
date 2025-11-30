@@ -32,6 +32,11 @@ export type BlockH6Element = {
   children: Descendant[];
 };
 
+export type BlockQuoteElement = {
+  type: 'block-quote';
+  children: Descendant[];
+};
+
 export type CustomElement =
   | BlockParagraphElement
   | BlockH1Element
@@ -39,7 +44,8 @@ export type CustomElement =
   | BlockH3Element
   | BlockH4Element
   | BlockH5Element
-  | BlockH6Element;
+  | BlockH6Element
+  | BlockQuoteElement;
 export type CustomElementType = CustomElement['type'];
 
 export type CustomText = {
